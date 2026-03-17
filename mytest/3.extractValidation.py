@@ -1,3 +1,10 @@
+import sys
+import io
+
+# 윈도우 표준 출력을 UTF-8로 강제 설정
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
+
 import os
 
 # 1. 상대 경로 설정
@@ -11,7 +18,7 @@ train_file_path = os.path.join(base_dir, 'train_set.txt')
 
 # 2. 파일 존재 확인 및 읽기
 if not os.path.exists(source_file):
-    print(f"❌ 에러: 원본 파일을 찾을 수 없습니다. 경로: {source_file}")
+    print(f"에러: 원본 파일을 찾을 수 없습니다. 경로: {source_file}")
 else:
     with open(source_file, 'r', encoding='utf-8') as f:
         full_content = f.read()
@@ -30,8 +37,8 @@ else:
     # 5. 결과 확인
     eval_size = os.path.getsize(eval_file_path) / 1024
     print(f"--- 평가/학습 데이터셋 분리 완료 ---")
-    print(f"📍 평가셋: {eval_file_path} ({eval_size:.2f} KB)")
-    print(f"📍 학습셋: {train_file_path} ({os.path.getsize(train_file_path) / 1024 / 1024:.2f} MB)")
+    print(f"평가셋: {eval_file_path} ({eval_size:.2f} KB)")
+    print(f"학습셋: {train_file_path} ({os.path.getsize(train_file_path) / 1024 / 1024:.2f} MB)")
 
     if 1.0 <= eval_size <= 2.0:
-        print("✅ 성공: 과제 요건(1~2KB) 충족!")
+        print("성공: 과제 요건(1~2KB) 충족!")

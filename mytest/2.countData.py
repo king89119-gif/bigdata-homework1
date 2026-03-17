@@ -1,3 +1,12 @@
+import sys
+import io
+
+# 윈도우 표준 출력을 UTF-8로 강제 설정
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
+
+# 이후 기존 코드 실행...
+
 import os
 
 # 1. 경로 설정 (상대 경로 방식)
@@ -21,8 +30,8 @@ total_no_space = 0
 
 # 데이터 존재 여부 먼저 확인
 if not os.path.exists(dir_path):
-    print(f"❌ 에러: 폴더를 찾을 수 없습니다. 경로: {dir_path}")
-    print("💡 가이드: 1.makeData.py를 먼저 실행하여 데이터를 추출하세요.")
+    print(f"에러: 폴더를 찾을 수 없습니다. 경로: {dir_path}")
+    print("가이드: 1.makeData.py를 먼저 실행하여 데이터를 추출하세요.")
 else:
     for file_name in target_files:
         full_path = os.path.join(dir_path, file_name)
@@ -52,6 +61,6 @@ else:
     # 과제 요건 확인용 안내 메시지
     print("\n[과제 요건 체크]")
     if total_size_mb >= 1.0:
-        print(f"✅ 학습 데이터셋 크기: {total_size_mb:.2f}MB (1MB 이상 요건 충족)")
+        print(f"학습 데이터셋 크기: {total_size_mb:.2f}MB (1MB 이상 요건 충족)")
     else:
-        print(f"⚠️ 학습 데이터셋 크기 부족: {total_size_mb:.2f}MB (추가 데이터 확보 필요)")
+        print(f"학습 데이터셋 크기 부족: {total_size_mb:.2f}MB (추가 데이터 확보 필요)")

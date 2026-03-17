@@ -1,3 +1,10 @@
+import sys
+import io
+
+# 윈도우 표준 출력을 UTF-8로 강제 설정
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
+
 import os
 import time
 import pandas as pd
@@ -14,7 +21,7 @@ eval_file = os.path.join(base_dir, 'evaluation_set.txt')
 def run_tokenizer_assignment():
     # 데이터 존재 여부 확인
     if not os.path.exists(train_file) or not os.path.exists(eval_file):
-        print("❌ 에러: 학습 또는 평가 데이터셋이 없습니다. 3번 스크립트를 먼저 실행하세요.")
+        print("에러: 학습 또는 평가 데이터셋이 없습니다. 3번 스크립트를 먼저 실행하세요.")
         return
 
     # 2. 데이터 불러오기
@@ -28,7 +35,7 @@ def run_tokenizer_assignment():
     ratios = [0.1, 0.5, 1.0]
     algorithms = ["BPE", "WordPiece"]
 
-    print("🚀 토크나이저 학습 및 평가를 시작합니다...")
+    print("토크나이저 학습 및 평가를 시작합니다...")
 
     for algo in algorithms:
         for r in ratios:
@@ -68,7 +75,7 @@ def run_tokenizer_assignment():
                 "Inference Speed (ms)": round(eval_speed_ms, 4),
                 "Avg Tokens/Sentence": round(avg_tokens, 2)
             })
-            print(f"✅ 완료: {algo} - {int(r*100)}% 학습")
+            print(f"완료: {algo} - {int(r*100)}% 학습")
 
     # 4. 결과 출력 및 저장
     df = pd.DataFrame(experiment_results)
@@ -79,7 +86,7 @@ def run_tokenizer_assignment():
     
     report_path = os.path.join(base_dir, 'tokenizer_comparison_results.csv')
     df.to_csv(report_path, index=False, encoding='utf-8-sig')
-    print(f"\n📊 최종 리포트 저장 완료: {report_path}")
+    print(f"\n최종 리포트 저장 완료: {report_path}")
 
 if __name__ == "__main__":
     run_tokenizer_assignment()
