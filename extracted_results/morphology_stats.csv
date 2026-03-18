@@ -1,4 +1,4 @@
 ﻿Algorithm,Total_Tokens,Avg_Tokens,Speed_ms
-Mecab,553,138.25,115.87
-Okt,458,114.5,1095.6
-Kkma,591,147.75,2822.45
+Mecab,553,138.25,110.62
+Okt,458,114.5,1054.79
+Kkma,591,147.75,2489.05
