@@ -1,3 +1,10 @@
+import sys
+import io
+
+# 윈도우 표준 출력을 UTF-8로 강제 설정
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
+
 import os
 
 # 1. 경로 설정
@@ -11,7 +18,7 @@ train_file_path = os.path.join(base_dir, 'train_set.txt')
 
 # 2. 파일 존재 확인 및 정제된 읽기
 if not os.path.exists(source_file):
-    print(f"❌ 에러: 원본 파일을 찾을 수 없습니다. 경로: {source_file}")
+    print(f"에러: 원본 파일을 찾을 수 없습니다. 경로: {source_file}")
 else:
     with open(source_file, 'r', encoding='utf-8') as f:
         lines = f.readlines()
